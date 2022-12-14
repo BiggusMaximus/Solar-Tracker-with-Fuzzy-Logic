@@ -25,4 +25,17 @@ void loop()
 {
   read_value_ldr();
   show_info("show_ldr");
+
+  if(top == 1)
+  {
+    VstepperUp();
+  }
+  if(top == 0)
+  {
+    VstepperDown();
+  }
+  else
+  {
+    VstepperNol();
+  }
 }
