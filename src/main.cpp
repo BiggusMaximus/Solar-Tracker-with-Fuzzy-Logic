@@ -5,7 +5,7 @@
 void show_info(String message)
 {
   /*
-    Showing Serial.print for debugging 
+    Showing Serial.print for debugging
   */
   if (message == "show_ldr")
   {
@@ -19,13 +19,19 @@ void show_info(String message)
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   ldr_innit();
   stepper_innit();
+  calibration_ldr();
 }
 
 void loop()
 {
-  read_value_ldr();
-  Tracking();
+  // show_ldr();
+  // Tracking(70.0, 20);
+  // VerticalStepper.step(360);
+  HorizontalStepper.step(30);
+  delay(2000);
+  HorizontalStepper.step(-30);
+  delay(2000);
 }
