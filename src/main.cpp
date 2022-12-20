@@ -27,11 +27,11 @@ void setup()
 
 void loop()
 {
-  // show_ldr();
-  // Tracking(70.0, 20);
+  show_ldr();
+  Tracking2();
   // VerticalStepper.step(360);
-  HorizontalStepper.step(30);
-  delay(2000);
-  HorizontalStepper.step(-30);
-  delay(2000);
+  // HorizontalStepper.step(60);
+  // delay(2000);
+  // HorizontalStepper.step(-60);
+  // delay(2000);
 }
