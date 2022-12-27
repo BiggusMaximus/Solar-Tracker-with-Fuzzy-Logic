@@ -3,13 +3,16 @@
 int MAX_VER, MAX_HOR = 0;
 int move = 0;
 // in1, in2, in3, in4
-Stepper VerticalStepper = Stepper(stepsPerRevolution, 2, 3, 4, 5);
-Stepper HorizontalStepper = Stepper(stepsPerRevolution, 6, 7, 8, 9);
-
+Stepper VerticalStepper = Stepper(stepsPerRevolution, 11, 10, 9, 8);
+Stepper HorizontalStepper = Stepper(stepsPerRevolution, 6, 5, 4, 3);
+int pwmH = 12;
+int pwmV = 7;
 void stepper_innit()
 {
   VerticalStepper.setSpeed(10);
   HorizontalStepper.setSpeed(10);
+  //pinMode(pwmH, OUTPUT);
+  //pinMode(pwmV, OUTPUT);
 }
 
 void Tracking(float THRESHOLD, int STEP_SIZE)
@@ -84,14 +87,22 @@ void Tracking(float THRESHOLD, int STEP_SIZE)
 void Tracking2(){
   if (top > bottom ){
     // if bottom is brighter than top
-    HorizontalStepper.step(1);
+    digitalWrite(pwmH, HIGH);
+    Serial.println("CCW");
+    VerticalStepper.step(1);
     if((top < 50 + (top + bottom)/2) and (top > 50 - (top + bottom)/2)){
-      HorizontalStepper.step(0);
+      digitalWrite(pwmH, LOW);
+      Serial.println("CCW THRESH");
+      VerticalStepper.step(0);
     }
   }else{
-    HorizontalStepper.step(-1);
+        digitalWrite(pwmH, HIGH);
+        Serial.println("CW");
+        VerticalStepper.step(-1);
     if((bottom < 50 + (top + bottom)/2) and (bottom > 50 - (top + bottom)/2)){
-      HorizontalStepper.step(0);
+      Serial.println("CW THRESH");
+      digitalWrite(pwmH, LOW);
+      VerticalStepper.step(0);
     }
   }
 }

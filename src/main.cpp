@@ -29,9 +29,10 @@ void loop()
 {
   show_ldr();
   Tracking2();
-  // VerticalStepper.step(360);
-  // HorizontalStepper.step(60);
-  // delay(2000);
-  // HorizontalStepper.step(-60);
-  // delay(2000);
+  //VerticalStepper.step(70);
+  //HorizontalStepper.step(60);
+  //delay(2000);
+  //VerticalStepper.step(-70);
+  //HorizontalStepper.step(-60);
+  //delay(2000);
 }
