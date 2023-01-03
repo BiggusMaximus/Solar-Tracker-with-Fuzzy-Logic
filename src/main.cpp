@@ -15,6 +15,11 @@ void show_info(String message)
         " | Left : " + String(left) +
         " | Right : " + String(right));
   }
+  else if(message == "show_limit_switch"){
+    Serial.println(
+      "Limit Vertical CCW : " + String(digitalRead(switchV_CCW)) + 
+      " | CW : " + String(digitalRead(switchV_CW)));
+  }
 }
 
 void setup()
@@ -27,12 +32,13 @@ void setup()
 
 void loop()
 {
-  show_ldr();
-  Tracking2();
+  show_ldr(true);
+  // show_info("show_limit_switch");
+  //Tracking2();
   //VerticalStepper.step(70);
   //HorizontalStepper.step(60);
   //delay(2000);
   //VerticalStepper.step(-70);
   //HorizontalStepper.step(-60);
-  //delay(2000);
+  
 }

@@ -26,7 +26,7 @@ void read_value_ldr()
     diff_horizontal = right - left;
 }
 
-void show_ldr()
+void show_ldr(bool show_text)
 {
     top = analogRead(LDR_ATAS) + CALIBRATION_TOP;
     bottom = analogRead(LDR_BAWAH) + CALIBRATION_BOTTOM;
@@ -35,13 +35,15 @@ void show_ldr()
 
     diff_vertical = top - bottom;
     diff_horizontal = right - left;
-    Serial.println(
-        "Top : " + String(top) +
-        " | Bottom : " + String(bottom) +
-        " | Left : " + String(left) +
-        " | Right : " + String(right) +
-        " | diff Vertical : " + String(diff_vertical) +
-        " | diff Horizontalal : " + String(diff_horizontal));
+    if (show_text == true){
+        Serial.println(
+            "Top : " + String(top) +
+            " | Bottom : " + String(bottom) +
+            " | Left : " + String(left) +
+            " | Right : " + String(right) +
+            " | diff Vertical : " + String(diff_vertical) +
+            " | diff Horizontalal : " + String(diff_horizontal));
+    }
 }
 void calibration_ldr()
 {

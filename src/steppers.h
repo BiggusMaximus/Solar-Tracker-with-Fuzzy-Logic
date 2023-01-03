@@ -1,18 +1,30 @@
 #include <Stepper.h>
 #define stepsPerRevolution 360
+
 int MAX_VER, MAX_HOR = 0;
 int move = 0;
 // in1, in2, in3, in4
 Stepper VerticalStepper = Stepper(stepsPerRevolution, 11, 10, 9, 8);
-Stepper HorizontalStepper = Stepper(stepsPerRevolution, 6, 5, 4, 3);
+Stepper HorizontalStepper = Stepper(stepsPerRevolution, 6, 5, 4, 2);
+
 int pwmH = 12;
 int pwmV = 7;
+int switchV_CCW = A0;
+int switchV_CW = A2;
+bool statusV_CW, statusV_CCW;
+
+
+
+//int switchH = 13;
+
 void stepper_innit()
 {
   VerticalStepper.setSpeed(10);
   HorizontalStepper.setSpeed(10);
   //pinMode(pwmH, OUTPUT);
   //pinMode(pwmV, OUTPUT);
+  pinMode(switchV_CW, INPUT_PULLUP);
+  pinMode(switchV_CCW, INPUT_PULLUP);
 }
 
 void Tracking(float THRESHOLD, int STEP_SIZE)
@@ -85,24 +97,45 @@ void Tracking(float THRESHOLD, int STEP_SIZE)
 }
 
 void Tracking2(){
+
   if (top > bottom ){
     // if bottom is brighter than top
-    digitalWrite(pwmH, HIGH);
-    Serial.println("CCW");
-    VerticalStepper.step(1);
-    if((top < 50 + (top + bottom)/2) and (top > 50 - (top + bottom)/2)){
-      digitalWrite(pwmH, LOW);
-      Serial.println("CCW THRESH");
-      VerticalStepper.step(0);
+    //digitalWrite(pwmH, HIGH);
+    if(digitalRead(switchV_CCW) == 0){
+      Serial.println("CCW PB Pressed");
+      VerticalStepper.step(-5);
+      delay(5000);
+
     }
-  }else{
-        digitalWrite(pwmH, HIGH);
-        Serial.println("CW");
-        VerticalStepper.step(-1);
-    if((bottom < 50 + (top + bottom)/2) and (bottom > 50 - (top + bottom)/2)){
-      Serial.println("CW THRESH");
-      digitalWrite(pwmH, LOW);
-      VerticalStepper.step(0);
+    else{
+      Serial.println("CCW");
+      VerticalStepper.step(1);
+      if((top < 50 + (top + bottom)/2) and (top > 50 - (top + bottom)/2)){
+        //digitalWrite(pwmH, LOW);
+        Serial.println("CCW THRESH");
+        VerticalStepper.step(0);
+        delay(5000);  
+      }
+
+    }
+
+  }
+
+  else{
+        //digitalWrite(pwmH, HIGH);
+    if(digitalRead(switchV_CW) == 0){
+      Serial.println("CW PB Pressed");
+      VerticalStepper.step(5);
+      delay(5000);
+    }else{
+      Serial.println("CW");
+      VerticalStepper.step(-1);
+      if((bottom < 50 + (top + bottom)/2) and (bottom > 50 - (top + bottom)/2)){
+        Serial.println("CW THRESH");
+        //digitalWrite(pwmH, LOW);
+        VerticalStepper.step(0);
+        delay(5000);
+      }
     }
   }
 }
