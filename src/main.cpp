@@ -3,16 +3,6 @@
 #include "steppers.h"
 
 
-void readSerialPort() {
-  String msg = "";
-  if (Serial.available()) {
-    delay(10);
-    while (Serial.available() > 0) {
-      msg += (char)Serial.read();
-    }
-    Serial.flush();
-  }
-}
 void show_info(String message)
 {
   /*
@@ -43,14 +33,8 @@ void setup()
 
 void loop()
 {
-  // show_ldr(true);
-  // show_info("show_limit_switch");
-  // Tracking2();
+  show_ldr(true);
+  show_info("show_limit_switch");
+  Tracking2();
   
-  readSerialPort();
-
-  for(int i = 0; i < 99 ; i++){
-    Serial.println(String(i) + "," + String(i + 1) + "," + String(i+2) + "," +String(i+3) + "," + String(i+4) + "," + String(i+5) + ",");
-    delay(800);
-  }
 }

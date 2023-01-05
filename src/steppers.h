@@ -10,8 +10,10 @@ Stepper HorizontalStepper = Stepper(stepsPerRevolution, 6, 5, 4, 2);
 int pwmH = 12;
 int pwmV = 7;
 int switchV_CCW = A0;
-int switchV_CW = A2;
-bool statusV_CW, statusV_CCW;
+int switchV_CW = A1;
+int switchH_CCW = A2;
+int switchH_CW = A3;
+
 
 
 
@@ -25,6 +27,8 @@ void stepper_innit()
   //pinMode(pwmV, OUTPUT);
   pinMode(switchV_CW, INPUT_PULLUP);
   pinMode(switchV_CCW, INPUT_PULLUP);
+  pinMode(switchH_CW, INPUT_PULLUP);
+  pinMode(switchH_CCW, INPUT_PULLUP);
 }
 
 void Tracking(float THRESHOLD, int STEP_SIZE)
@@ -123,7 +127,7 @@ void Tracking2(){
 
   else{
         //digitalWrite(pwmH, HIGH);
-    if(digitalRead(switchV_CW) == 0){
+    if(digitalRead(switchH_CW) == 0){
       Serial.println("Vertical CW PB Pressed");
       VerticalStepper.step(5);
       delay(5000);
@@ -142,7 +146,7 @@ void Tracking2(){
   if (left > right ){
     // if bottom is brighter than top
     //digitalWrite(pwmH, HIGH);
-    if(digitalRead(switchV_CCW) == 0){
+    if(digitalRead(switchH_CCW) == 0){
       Serial.println("Horizontal CCW PB Pressed");
       HorizontalStepper.step(-5);
       delay(5000);
