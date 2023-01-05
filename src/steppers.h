@@ -102,17 +102,17 @@ void Tracking2(){
     // if bottom is brighter than top
     //digitalWrite(pwmH, HIGH);
     if(digitalRead(switchV_CCW) == 0){
-      Serial.println("CCW PB Pressed");
+      Serial.println("Vertical CCW PB Pressed");
       VerticalStepper.step(-5);
       delay(5000);
 
     }
     else{
-      Serial.println("CCW");
+      Serial.println("Vertical CCW");
       VerticalStepper.step(1);
       if((top < 50 + (top + bottom)/2) and (top > 50 - (top + bottom)/2)){
         //digitalWrite(pwmH, LOW);
-        Serial.println("CCW THRESH");
+        Serial.println("Vertical CCW THRESH");
         VerticalStepper.step(0);
         delay(5000);  
       }
@@ -124,16 +124,57 @@ void Tracking2(){
   else{
         //digitalWrite(pwmH, HIGH);
     if(digitalRead(switchV_CW) == 0){
-      Serial.println("CW PB Pressed");
+      Serial.println("Vertical CW PB Pressed");
       VerticalStepper.step(5);
       delay(5000);
     }else{
-      Serial.println("CW");
+      Serial.println("Vertical CW");
       VerticalStepper.step(-1);
       if((bottom < 50 + (top + bottom)/2) and (bottom > 50 - (top + bottom)/2)){
-        Serial.println("CW THRESH");
+        Serial.println("Vertical CW THRESH");
         //digitalWrite(pwmH, LOW);
         VerticalStepper.step(0);
+        delay(5000);
+      }
+    }
+  }
+
+  if (left > right ){
+    // if bottom is brighter than top
+    //digitalWrite(pwmH, HIGH);
+    if(digitalRead(switchV_CCW) == 0){
+      Serial.println("Horizontal CCW PB Pressed");
+      HorizontalStepper.step(-5);
+      delay(5000);
+
+    }
+    else{
+      Serial.println("Horizontal CCW");
+      HorizontalStepper.step(1);
+      if((left < 50 + (left + right)/2) and (left > 50 - (left + right)/2)){
+        //digitalWrite(pwmH, LOW);
+        Serial.println("Horizontal CCW THRESH");
+        HorizontalStepper.step(0);
+        delay(5000);  
+      }
+
+    }
+
+  }
+
+  else{
+        //digitalWrite(pwmH, HIGH);
+    if(digitalRead(switchV_CW) == 0){
+      Serial.println("Horizontal CW PB Pressed");
+      HorizontalStepper.step(5);
+      delay(5000);
+    }else{
+      Serial.println("Horizontal CW");
+      HorizontalStepper.step(-1);
+      if((right < 50 + (left + right)/2) and (right > 50 - (left + right)/2)){
+        Serial.println("Horizontal CW THRESH");
+        //digitalWrite(pwmH, LOW);
+        HorizontalStepper.step(0);
         delay(5000);
       }
     }
