@@ -19,7 +19,9 @@ void show_info(String message)
   else if(message == "show_limit_switch"){
     Serial.println(
       "Limit Vertical CCW : " + String(digitalRead(switchV_CCW)) + 
-      " | CW : " + String(digitalRead(switchV_CW)));
+      " | Limit Vertical CW : " + String(digitalRead(switchV_CW)) + 
+      " | Limit Horizontal CCW : " + String(digitalRead(switchH_CCW)) + 
+      " | Limit Horizontal CW : " + String(digitalRead(switchH_CW)));
   }
 }
 
@@ -28,13 +30,14 @@ void setup()
   Serial.begin(115200);
   ldr_innit();
   stepper_innit();
-  calibration_ldr();
+  // calibration_ldr();
 }
 
 void loop()
 {
-  show_ldr(true);
-  show_info("show_limit_switch");
-  Tracking2();
+  show_ldr(false);
+  //show_info("show_limit_switch");
+  Tracking2_vertical();
+  Tracking2_horizontal();
   
 }
