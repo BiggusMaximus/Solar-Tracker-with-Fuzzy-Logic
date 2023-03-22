@@ -9,7 +9,7 @@ Stepper HorizontalStepper = Stepper(stepsPerRevolution, 6, 5, 4, 2);
 
 int pwmH = 12;
 int pwmV = 7;
-int switchV_CCW = A0;
+int switchV_CCW = 2;
 int switchV_CW = A1;
 int switchH_CCW = A3;
 int switchH_CW = A2;
@@ -21,7 +21,7 @@ int switchH_CW = A2;
 
 void stepper_innit()
 {
-  VerticalStepper.setSpeed(1);
+  VerticalStepper.setSpeed(10);
   HorizontalStepper.setSpeed(5);
   //pinMode(pwmH, OUTPUT);
   //pinMode(pwmV, OUTPUT);
